@@ -1,12 +1,13 @@
 {
-  "engines": {
-    "node": "22.20.0"
-  },
   "name": "project-1",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": "22.20.0"
+  },
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +22,7 @@
     "ejs-mate": "^4.0.0",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "joi": "^18.2.8",
     "method-override": "^3.0.0",
     "mongoose": "^9.9.4",
     "multer": "^2.3.0",
