@@ -1,0 +1,127 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <%= success %>
+
+  <!-- Search Bar -->
+  <div class="search-bar-wrapper d-flex justify-content-center mb-4">
+    <form action="/listings/search" method="GET" class="search-bar d-flex align-items-center">
+      <div class="search-field">
+        <label>Where</label>
+        <input
+          type="text"
+          name="q"
+          placeholder="Search destinations"
+          value="<%= typeof query !== 'undefined' ? query : '' %>"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <div class="search-field">
+        <label>Check in</label>
+        <input type="text" placeholder="Add dates" readonly />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <div class="search-field">
+        <label>Check out</label>
+        <input type="text" placeholder="Add dates" readonly />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <div class="search-field">
+        <label>Who</label>
+        <input type="text" placeholder="Add guests" readonly />
+      </div>
+
+      <button type="submit" class="search-btn">
+        <i class="bi bi-search"></i>
+      </button>
+    </form>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar-wrapper mb-4">
+    <div class="filter-bar d-flex align-items-center">
+      <div class="filter-scroll d-flex">
+        <div class="filter-item active" data-filter="trending">
+          <i class="fa-solid fa-fire"></i>
+          <p>Trending</p>
+        </div>
+        <div class="filter-item" data-filter="rooms">
+          <i class="fa-solid fa-bed"></i>
+          <p>Rooms</p>
+        </div>
+        <div class="filter-item" data-filter="iconic-cities">
+          <i class="fa-solid fa-mountain-city"></i>
+          <p>Iconic Cities</p>
+        </div>
+        <div class="filter-item" data-filter="mountains">
+          <i class="fa-solid fa-mountain"></i>
+          <p>Mountains</p>
+        </div>
+        <div class="filter-item" data-filter="castles">
+          <i class="fa-brands fa-fort-awesome"></i>
+          <p>Castles</p>
+        </div>
+        <div class="filter-item" data-filter="pools">
+          <i class="fa-solid fa-person-swimming"></i>
+          <p>Amazing Pools</p>
+        </div>
+        <div class="filter-item" data-filter="camping">
+          <i class="fa-solid fa-tents"></i>
+          <p>Camping</p>
+        </div>
+        <div class="filter-item" data-filter="farms">
+          <i class="fa-solid fa-cow"></i>
+          <p>Farms</p>
+        </div>
+        <div class="filter-item" data-filter="arctic">
+          <i class="fa-solid fa-igloo"></i>
+          <p>Arctic</p>
+        </div>
+      </div>
+
+      <div class="tax-switch-wrapper ms-auto">
+        <label class="tax-switch-label">
+          <span>Display total price before taxes</span>
+          <span class="tax-switch">
+            <input type="checkbox" id="taxToggle" />
+            <span class="tax-slider"></span>
+          </span>
+        </label>
+      </div>
+
+      <button class="filter-toggle-btn">
+        <i class="bi bi-sliders"></i>
+        Filters
+      </button>
+    </div>
+  </div>
+
+  <h3 class="mb-4">All Listings</h3>
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+    <% for (let listing of allListings) { %>
+      <div class="col">
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <div class="card listing-card h-100 shadow-sm">
+            <img
+              src="<%= listing.image.url %>"
+              class="card-img-top listing-img"
+              alt="listing image"
+            />
+            <div class="card-body">
+              <p class="card-title mb-1"><%= listing.title %></p>
+              <p class="card-text text-muted mb-0 price-display" data-base-price="<%= listing.price %>">
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% } %>
+  </div>
+</body>
